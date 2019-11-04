@@ -3,7 +3,7 @@ import { Text, View, TextInput, Image, TouchableOpacity, ImageBackground } from 
 import Hour from './components/upcoming';
 
 
-const apiKey = 'bb00579aa9065dd7cebacab52d25b101';
+const apiKey = 'YOUR_API_KEY';
 
 
 export default class App extends Component{

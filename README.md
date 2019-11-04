@@ -11,6 +11,7 @@ Shows current weather and upcoming 24 hours.
 
 * React Native
 * JavaScript
+* Expo
 
 
 ### Setup

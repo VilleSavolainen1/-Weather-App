@@ -4,7 +4,7 @@
 
 
 ## General Info
-Weather forecast using openweathermap API.
+Weather forecast app using openweathermap API.
 
 ### Technologies
 

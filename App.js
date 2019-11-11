@@ -3,7 +3,7 @@ import { Text, View, TextInput, Image, TouchableOpacity, ImageBackground } from 
 import Hour from './components/upcoming';
 
 
-const apiKey = 'YOUR_API_KEY';
+const apiKey = 'bb00579aa9065dd7cebacab52d25b101';
 
 
 export default class App extends Component{
@@ -61,7 +61,7 @@ export default class App extends Component{
      //Hourly response
     const api_call_hourly = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=${apiKey}`)
     const resphour = await api_call_hourly.json();
-
+    
     
     if(resphour.list){
       this.setState({ 
@@ -176,7 +176,11 @@ export default class App extends Component{
      }
     const date = new Date();
     const time = date.getUTCHours() + 2;
-    if(time > 21 || time < 6){
+    const unix_sunrise = new Date(response.sys.sunrise * 1000);
+    const unix_sunset = new Date(response.sys.sunset * 1000);
+    const sunrise = unix_sunrise.getHours();
+    const sunset = unix_sunset.getHours();
+    if(time > sunset && time < sunrise){
       if(response.weather[0].main = "Clear")
       this.setState({ img: require('./assets/moon.png')}); 
     }

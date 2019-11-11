@@ -4,7 +4,7 @@
 
 
 ## General Info
-Weather forecast app using openweathermap API. 
+Weather forecast app using OpenWeatherMap API. 
 Shows current weather and upcoming 24 hours.
 
 ### Technologies

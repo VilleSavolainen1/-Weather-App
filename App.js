@@ -53,15 +53,14 @@ export default class App extends Component{
   };
 
   search = async() => {
-     //Current weather url response
-     const { input } = this.state;
-     const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input}&APPID=${apiKey}&lang=fi`);
-     const response = await api_call.json();
+    //Current weather url response
+    const { input } = this.state;
+    const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input}&APPID=${apiKey}&lang=fi`);
+    const response = await api_call.json();
 
-     //Hourly response
+    //Hourly weather response
     const api_call_hourly = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=${apiKey}`)
     const resphour = await api_call_hourly.json();
-    
     
     if(resphour.list){
       this.setState({ 
@@ -96,14 +95,22 @@ export default class App extends Component{
     }
 
      if(response.main){
-       this.setState({ city: response.name, 
+        //const tz = response.timezone * 1000;
+        const responseTime = new Date(response.dt * 1000);
+        const hour = responseTime.getHours();
+        const minutes = responseTime.getMinutes();
+        const unix_sunrise = new Date(response.sys.sunrise * 1000);
+        const unix_sunset = new Date(response.sys.sunset * 1000);
+        const sunrise = unix_sunrise.getHours();
+        const sunset = unix_sunset.getHours();
+
+
+        this.setState({ city: response.name, 
         temperature: (response.main.temp - 273.15).toFixed(1) + ' °C', 
         country: response.sys.country, error: '', 
         description: response.weather[0].description,
         wind: 'Tuuli: ' + response.wind.speed + ' m/s'})
-        
-
-
+      
        switch(response.weather[0].main){
       
         case "Clouds": this.setState({ img: require('./assets/clouds.png')});
@@ -121,7 +128,11 @@ export default class App extends Component{
         case "Snow": this.setState({ img: require('./assets/snow.png')});
         break;
         
-        case "Clear": this.setState({ img: require('./assets/clear.png')});
+        case "Clear": if(hour > sunset || hour < sunrise){
+                        this.setState({ img: require('./assets/moon.png')}); 
+                      }else{
+                        this.setState({ img: require('./assets/clear.png')});
+                      }
         break;
   
         case "Mist":
@@ -137,7 +148,7 @@ export default class App extends Component{
   
         default: this.setState({ img: "blank"});
         }
-
+    
      }else {
        this.setState({ city: '', 
             temperature: '', 
@@ -174,21 +185,10 @@ export default class App extends Component{
             deschour7: '',
             deschour8: ''});
      }
-    const date = new Date();
-    const time = date.getUTCHours() + 2;
-    const unix_sunrise = new Date(response.sys.sunrise * 1000);
-    const unix_sunset = new Date(response.sys.sunset * 1000);
-    const sunrise = unix_sunrise.getHours();
-    const sunset = unix_sunset.getHours();
-    if(time > sunset && time < sunrise){
-      if(response.weather[0].main = "Clear")
-      this.setState({ img: require('./assets/moon.png')}); 
-    }
   }
 
-
 render(){
-  const { city, country, error, description, wind, temperature, img } = this.state;
+  const { city, country, error, description, wind, temperature, img} = this.state;
 
   return(
     <ImageBackground source={require('./assets/serveimage.jpg')} style={{width: '100%', height: '100%'}}>
@@ -219,7 +219,7 @@ render(){
       </View>
       <View style={{height: 285, paddingTop: 2}}>
         <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-          <Image style={{width: 64, height: 55}} source={img} />
+          <Image style={{width: 64, height: 60}} source={img} />
         </View> 
         <Text style={{fontSize: 22, textAlign:'center', color: 'white', paddingBottom: 10}}>{city + ' '}{country}{error}</Text>
         <Text style={{fontSize: 65, textAlign: 'center', color: 'white', paddingBottom: 10}} >{temperature}</Text>

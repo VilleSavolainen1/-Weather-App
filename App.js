@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TextInput, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import Hour from './components/upcoming';
 
-
 const apiKey = 'bb00579aa9065dd7cebacab52d25b101';
-
 
 export default class App extends Component{
   constructor(props){
@@ -93,7 +91,6 @@ export default class App extends Component{
       deschour8: resphour.list[8].weather[0].main
       });
     }
-
      if(response.main){
         //const tz = response.timezone * 1000;
         const responseTime = new Date(response.dt * 1000);
@@ -110,7 +107,11 @@ export default class App extends Component{
         country: response.sys.country, error: '', 
         description: response.weather[0].description,
         wind: 'Tuuli: ' + response.wind.speed + ' m/s'})
+<<<<<<< HEAD
       
+=======
+        
+>>>>>>> b974714848c8d863c89b7a9f8023943e6385a63b
        switch(response.weather[0].main){
       
         case "Clouds": this.setState({ img: require('./assets/clouds.png')});
@@ -186,7 +187,10 @@ export default class App extends Component{
             deschour8: ''});
      }
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> b974714848c8d863c89b7a9f8023943e6385a63b
 render(){
   const { city, country, error, description, wind, temperature, img} = this.state;
 

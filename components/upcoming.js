@@ -16,7 +16,6 @@ export default class Hour extends Component{
         let hour = [];
         let descimage = [];
 
-
         //Kelvin to celsius 
        if(time){
         temps.forEach(short => {

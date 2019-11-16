@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 
 export default class Hour extends Component{
   
@@ -42,7 +42,7 @@ export default class Hour extends Component{
                 case "Snow": descimage.push(require("../assets/snow.png"));
                 break;
                 
-                case "Clear": descimage.push(require("../assets/clear.png"));
+                case "Clear": descimage.push(require("../assets/sunmoon.png"));
                 break;
           
                 case "Mist":
@@ -76,7 +76,7 @@ export default class Hour extends Component{
             color: '#fff',
             paddingLeft: 5,
             paddingRight: 5,
-            width: 70             
+            width: 80           
         },
         row: {
             flexDirection: 'row',
@@ -92,9 +92,6 @@ export default class Hour extends Component{
     return(
         <View>
             <View style={{borderTopWidth: 1, borderColor: '#fff', paddingBottom: 8}}></View>
-            <View style={styles.row}>
-                <Image source={require('../assets/clock.png')} style={styles.image}/>
-            </View>
             <View style={styles.row}>
                 <Text style={styles.upcoming}>{hour[0]}</Text>
                 <Text style={styles.upcoming}>{celsius[0]}</Text>

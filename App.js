@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TextInput, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import Hour from './components/upcoming';
 
-const apiKey = 'bb00579aa9065dd7cebacab52d25b101';
+const apiKey = "API_KEY";
 
 export default class App extends Component{
   constructor(props){
@@ -107,11 +107,7 @@ export default class App extends Component{
         country: response.sys.country, error: '', 
         description: response.weather[0].description,
         wind: 'Tuuli: ' + response.wind.speed + ' m/s'})
-<<<<<<< HEAD
       
-=======
-        
->>>>>>> b974714848c8d863c89b7a9f8023943e6385a63b
        switch(response.weather[0].main){
       
         case "Clouds": this.setState({ img: require('./assets/clouds.png')});
@@ -187,12 +183,8 @@ export default class App extends Component{
             deschour8: ''});
      }
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> b974714848c8d863c89b7a9f8023943e6385a63b
 render(){
-  const { city, country, error, description, wind, temperature, img} = this.state;
+  const { city, country, error, description, wind, temperature, img } = this.state;
 
   return(
     <ImageBackground source={require('./assets/serveimage.jpg')} style={{width: '100%', height: '100%'}}>
@@ -261,11 +253,11 @@ render(){
         deschour7={this.state.deschour7}
         deschour8={this.state.deschour8}
         />
+        </View>
       </View>
-    </View>
-  </ImageBackground>
-  )
-}
+    </ImageBackground>
+    )
+  }
 }
 
 
